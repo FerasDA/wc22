@@ -1,0 +1,172 @@
+---
+---
+
+<!-- adapted from https://blog.codepen.io/2018/02/16/need-make-tournament-bracket/ -->
+<main id="tournament">
+  <ul class="round round-16">
+    <li class="spacer">&nbsp;</li>
+
+    <li class="game game-top winner">1A <span><span></span></span></li>
+    <li class="game game-spacer">&nbsp;</li>
+    <li class="game game-bottom">2B <span><span></span></span></li>
+
+    <li class="spacer">&nbsp;</li>
+
+    <li class="game game-top winner">1C <span></span></li>
+    <li class="game game-spacer">&nbsp;</li>
+    <li class="game game-bottom">2D <span></span></li>
+
+    <li class="spacer">&nbsp;</li>
+
+    <li class="game game-top">1E <span></span></li>
+    <li class="game game-spacer">&nbsp;</li>
+    <li class="game game-bottom winner">2F <span></span></li>
+
+    <li class="spacer">&nbsp;</li>
+
+    <li class="game game-top winner">1G <span></span></li>
+    <li class="game game-spacer">&nbsp;</li>
+    <li class="game game-bottom">2H <span></span></li>
+
+    <li class="spacer">&nbsp;</li>
+
+    <li class="game game-top winner">1B <span></span></li>
+    <li class="game game-spacer">&nbsp;</li>
+    <li class="game game-bottom">2A <span></span></li>
+
+    <li class="spacer">&nbsp;</li>
+
+    <li class="game game-top winner">1D <span></span></li>
+    <li class="game game-spacer">&nbsp;</li>
+    <li class="game game-bottom">2C <span></span></li>
+
+    <li class="spacer">&nbsp;</li>
+
+    <li class="game game-top winner">1F <span></span></li>
+    <li class="game game-spacer">&nbsp;</li>
+    <li class="game game-bottom">2E <span></span></li>
+
+    <li class="spacer">&nbsp;</li>
+
+    <li class="game game-top winner">1H <span></span></li>
+    <li class="game game-spacer">&nbsp;</li>
+    <li class="game game-bottom">2G <span></span></li>
+
+    <li class="spacer">&nbsp;</li>
+  </ul>
+
+  <ul class="round round-8">
+    <li class="spacer">&nbsp;</li>
+
+    <li class="game game-top winner"><span></span></li>
+    <li class="game game-spacer">&nbsp;</li>
+    <li class="game game-bottom"><span></span></li>
+
+    <li class="spacer">&nbsp;</li>
+
+    <li class="game game-top winner"><span></span></li>
+    <li class="game game-spacer">&nbsp;</li>
+    <li class="game game-bottom"><span></span></li>
+
+    <li class="spacer">&nbsp;</li>
+
+    <li class="game game-top"><span></span></li>
+    <li class="game game-spacer">&nbsp;</li>
+    <li class="game game-bottom winner"><span></span></li>
+
+    <li class="spacer">&nbsp;</li>
+
+    <li class="game game-top"><span></span></li>
+    <li class="game game-spacer">&nbsp;</li>
+    <li class="game game-bottom winner"><span></span></li>
+
+    <li class="spacer">&nbsp;</li>
+  </ul>
+  <ul class="round round-4">
+    <li class="spacer">&nbsp;</li>
+
+    <li class="game game-top winner"><span></span></li>
+    <li class="game game-spacer">&nbsp;</li>
+    <li class="game game-bottom"><span></span></li>
+
+    <li class="spacer">&nbsp;</li>
+
+    <li class="game game-top"><span></span></li>
+    <li class="game game-spacer">&nbsp;</li>
+    <li class="game game-bottom winner"><span></span></li>
+
+    <li class="spacer">&nbsp;</li>
+  </ul>
+  <ul class="round round-2">
+    <li class="spacer">&nbsp;</li>
+
+    <li class="game game-top winner"><span></span></li>
+    <li class="game game-spacer">&nbsp;</li>
+    <li class="game game-bottom"><span></span></li>
+
+    <li class="spacer">&nbsp;</li>
+  </ul>
+</main>
+
+<style>
+  /*
+ *  Flex Layout Specifics
+*/
+  main {
+    display: flex;
+    flex-direction: row;
+  }
+  .round {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 400px;
+    list-style: none;
+    padding: 0;
+  }
+  .round .spacer {
+    flex-grow: 1;
+  }
+  .round .spacer:first-child,
+  .round .spacer:last-child {
+    flex-grow: 0.5;
+  }
+
+  .round .game-spacer {
+    flex-grow: 1;
+  }
+
+  /*
+ *  General Styles
+*/
+  body {
+    font-family: sans-serif;
+    font-size: small;
+    padding: 10px;
+  }
+
+  li.game {
+    padding-left: 20px;
+  }
+
+  li.game.winner {
+    font-weight: bold;
+  }
+  li.game span {
+    float: right;
+    margin-right: 5px;
+  }
+
+  li.game-top {
+    border-bottom: 1px solid #aaa;
+  }
+
+  li.game-spacer {
+    border-right: 1px solid #aaa;
+    min-height: 40px;
+  }
+
+  li.game-bottom {
+    border-top: 1px solid #aaa;
+  }
+</style>
