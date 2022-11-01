@@ -1,42 +1,78 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Card from "../components/Card.astro";
-import Group from "../components/Group.astro";
+import Group, { Team } from "../components/Group.astro";
 import Bracket from "../components/Bracket.astro";
+
+const response = await fetch(
+  "https://api.baseql.com/airtable/graphql/appPY7EZiXBATGkqR",
+  {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      query: `
+				query getTeams {
+					teams(_order_by: "group") {
+						name
+						group
+					}
+				}`,
+    }),
+  }
+);
+const json = await response.json();
+const data: Team[] = json.data.teams;
+const groups = ["A", "B", "C", "D", "E", "F", "G", "H"].map((g) => {
+  return data.filter((team) => team.group === g);
+});
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title="2022 FIFA World Cup">
   <main>
     <h1>2022 FIFA World Cup</h1>
-    <p class="instructions">lorum impsum...</p>
+    <p class="instructions">
+      The World Cup is finally here! I will be running a bracket competition. If
+      you'd like to enter please submit your picks for each round by the
+      deadlines:
+      <br />
+      11/19 for group stage, 12/2 for the round of 16, 12/6 for quarterfinals, 12/12
+      for semifinals, and 12/16 for the 3rd place and final.
+      <br />
+      The form below will before the start of each round to allow you to enter your
+      selections.
+    </p><h2>Groups</h2>
+    <p class="instructions">
+      In the group stage, teams compete within eight groups of four teams each.
+      The top two teams from each group advance to the knockout stage. The group
+      stage is set to begin on November 20th and concludes on December 2nd.
+    </p>
     <ul role="list" class="link-card-grid">
-      <Group data={""} />
-      <Group />
-      <Group />
-      <Group />
-      <Group />
-      <Group />
-      <Group />
-      <Group />
-			<!-- TODO: pull data from Airtable -->
-      <!-- <Card
-				href="https://docs.astro.build/"
-				title="Documentation"
-				body="Learn how Astro works and explore the official API docs."
-			/> -->
+      {
+        groups.map((g) => {
+          return <Group teams={g} />;
+        })
+      }
     </ul>
+    <h2>Knockout Stage</h2>
+    <p class="instructions">
+      The knockout stage is a single-elimination tournament in which teams play
+      each other in one-off matches. It begins with the round of 16 in which the
+      winner of each group plays against the runner-up of another group. This is
+      followed by the quarter-finals, the semi-finals, the third-place match
+      (contested by the losing semi-finalists), and the final. The Knockout
+      stage is set to begin on December 3rd and the Final is on December 18.
+    </p>
+    <Bracket />
+    <div id="airtable-form">
+      <script src="https://static.airtable.com/js/embed/embed_snippet_v1.js"
+      ></script><iframe
+        class="airtable-embed airtable-dynamic-height"
+        src="https://airtable.com/embed/shrJZ1Yq30nXI8TkO?backgroundColor=teal"
+        frameborder="0"
+        width="100%"
+        height="3495"
+        style="background: transparent; border: 1px solid #ccc;"></iframe>
+    </div>
   </main>
-  <Bracket />
-  <div id="airtable-form">
-    <script src="https://static.airtable.com/js/embed/embed_snippet_v1.js"
-    ></script><iframe
-      class="airtable-embed airtable-dynamic-height"
-      src="https://airtable.com/embed/shrJZ1Yq30nXI8TkO?backgroundColor=teal"
-      frameborder="0"
-      width="100%"
-      height="3495"
-      style="background: transparent; border: 1px solid #ccc;"></iframe>
-  </div>
 </Layout>
 
 <style>
@@ -49,6 +85,7 @@ import Bracket from "../components/Bracket.astro";
     font-size: 3rem;
     font-weight: 800;
     margin: 0;
+    color: #56042c;
   }
   .instructions {
     line-height: 1.6;

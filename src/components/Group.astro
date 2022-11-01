@@ -1,36 +1,30 @@
 ---
-// export interface Props {
-//   title: string;
-//   body: string;
-//   href: string;
-// }
-
-// const { href, title, body } = Astro.props;
+export interface Team {
+  name: string;
+  group: string;
+}
+export interface Props {
+  teams: Team[];
+}
+const { teams } = Astro.props;
 ---
-
 <div id="group">
   <table>
     <thead>
       <tr>
-        <th>Group #</th>
+        <th>Group {teams[0].group}</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Team</td>
-      </tr>
-      <tr>
-        <td>Team</td>
-      </tr>
-      <tr>
-        <td>Team</td>
-      </tr>
-      <tr>
-        <td>Team</td>
-      </tr>
-      <tr>
-        <td>Team</td>
-      </tr>
+      {
+        teams.map((team) => {
+          return (
+            <tr>
+              <td>{team.name}</td>
+            </tr>
+          );
+        })
+      }
     </tbody>
   </table>
 </div>
