@@ -1,7 +1,64 @@
 ---
 import Layout from "../layouts/Layout.astro";
+
+interface Participant {
+  name: string;
+  score: number;
+}
+const response = await fetch(
+  "https://api.baseql.com/airtable/graphql/appPY7EZiXBATGkqR",
+  {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      query: `
+				query getParticipants {
+					bracketAnswers(_order_by: "score") {
+            name
+            score
+          }
+				}`,
+    }),
+  }
+);
+const json = await response.json();
+const participants: Participant[] = json.data.bracketAnswers;
 ---
 
 <Layout title="Leaderboard">
-  <h1>Leaderboard</h1>
+  <main>
+    <h1>Leaderboard</h1>
+    <p class="instructions">
+      leaderboard will update after each stage results are calculated
+    </p>
+    <ul>
+      {
+        participants.map((p) => {
+          return <li>{p.name} {p.score}</li>;
+        })
+      }
+    </ul>
+  </main>
 </Layout>
+
+<style>
+  main {
+    margin: auto;
+    padding: 1.5rem;
+    max-width: 120ch;
+  }
+  h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin: 0;
+    color: #56042c;
+  }
+  .instructions {
+    line-height: 1.6;
+    margin: 1rem 0;
+    border: 1px solid rgba(var(--accent), 25%);
+    background-color: white;
+    padding: 1rem;
+    border-radius: 0.4rem;
+  }
+</style>
