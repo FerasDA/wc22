@@ -10,12 +10,21 @@ const response = await fetch(
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       query: `
-				query getTeams {
-					teams(_order_by: "group") {
-						name
-						group
-					}
-				}`,
+      query getTeams {
+        teams(_order_by: [
+          {group: "asc"}, 
+          {points: "desc"},
+          {gd: "desc"}
+        ])
+        {
+          name
+          group
+          points
+          ga
+          gf
+          gd
+        }
+      }`,
     }),
   }
 );
@@ -38,8 +47,8 @@ const groups = ["A", "B", "C", "D", "E", "F", "G", "H"].map((g) => {
       12/6 for quarterfinals, 12/12 for semifinals, and 12/16 for the 3rd place
       and final.
       <br />
-      The form below will open before the start of each round to allow you to enter your
-      selections.
+      The form below will open before the start of each round to allow you to enter
+      your selections.
     </p><h2>Groups</h2>
     <p class="instructions">
       In the group stage, teams compete within eight groups of four teams each.
