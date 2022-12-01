@@ -173,10 +173,10 @@ const participants: Participant[] = json.data.bracketAnswers;
         </thead>
         <tbody>
           {
-            participants.map((p) => {
+            participants.map((p, index) => {
               return (
                 <tr>
-                  <td class="table-left">{p.name}</td>
+                  <td class="table-left">{index}. {p.name}</td>
                   <td>{p.score}</td>
                   <td>{p._1A[0].flag}</td>
                   <td>{p._2A[0].flag}</td>
