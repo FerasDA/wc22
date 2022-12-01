@@ -1,58 +1,47 @@
 ---
+import type { Team } from "./Group.astro";
+
+export interface Props {
+  teams: Team[];
+}
+const { teams } = Astro.props;
+const firstPlaceTeams = teams.filter((t) => t.position?.includes("1"));
+const secondPlaceTeams = teams.filter((t) => t.position?.includes("2"));
+
+let roundof16 = [];
+for (let i = 0; i < firstPlaceTeams.length; i = i + 2) {
+  roundof16.push(firstPlaceTeams[i]);
+  roundof16.push(secondPlaceTeams[i + 1]);
+}
+for (let i = 1; i < firstPlaceTeams.length; i = i + 2) {
+  roundof16.push(firstPlaceTeams[i]);
+  roundof16.push(secondPlaceTeams[i - 1]);
+}
 ---
 
 <!-- adapted from https://blog.codepen.io/2018/02/16/need-make-tournament-bracket/ -->
 <main id="tournament">
   <ul class="round round-16">
     <li class="spacer">&nbsp;</li>
-
-    <li class="game game-top winner">1A <span><span></span></span></li>
-    <li class="game game-spacer">&nbsp;</li>
-    <li class="game game-bottom">2B <span><span></span></span></li>
-
-    <li class="spacer">&nbsp;</li>
-
-    <li class="game game-top winner">1C <span></span></li>
-    <li class="game game-spacer">&nbsp;</li>
-    <li class="game game-bottom">2D <span></span></li>
-
-    <li class="spacer">&nbsp;</li>
-
-    <li class="game game-top">1E <span></span></li>
-    <li class="game game-spacer">&nbsp;</li>
-    <li class="game game-bottom winner">2F <span></span></li>
-
-    <li class="spacer">&nbsp;</li>
-
-    <li class="game game-top winner">1G <span></span></li>
-    <li class="game game-spacer">&nbsp;</li>
-    <li class="game game-bottom">2H <span></span></li>
-
-    <li class="spacer">&nbsp;</li>
-
-    <li class="game game-top winner">1B <span></span></li>
-    <li class="game game-spacer">&nbsp;</li>
-    <li class="game game-bottom">2A <span></span></li>
-
-    <li class="spacer">&nbsp;</li>
-
-    <li class="game game-top winner">1D <span></span></li>
-    <li class="game game-spacer">&nbsp;</li>
-    <li class="game game-bottom">2C <span></span></li>
-
-    <li class="spacer">&nbsp;</li>
-
-    <li class="game game-top winner">1F <span></span></li>
-    <li class="game game-spacer">&nbsp;</li>
-    <li class="game game-bottom">2E <span></span></li>
-
-    <li class="spacer">&nbsp;</li>
-
-    <li class="game game-top winner">1H <span></span></li>
-    <li class="game game-spacer">&nbsp;</li>
-    <li class="game game-bottom">2G <span></span></li>
-
-    <li class="spacer">&nbsp;</li>
+    {
+      roundof16.map((t) => {
+        if (t.position?.includes('1')) {
+          return (
+            <li class="game game-top winner">
+              {t.name}
+              <span><span /></span></li>
+            <li class="game game-spacer">&nbsp;</li>
+          );
+        } else {
+          return (
+            <li class="game game-bottom">
+              {t.name}<span><span></span></span>
+            </li> 
+            <li class="spacer">&nbsp;</li>
+          )
+        }
+      })
+    }
   </ul>
 
   <ul class="round round-8">
