@@ -1,9 +1,26 @@
 ---
+import type { Team } from "../components/Group.astro";
 import Layout from "../layouts/Layout.astro";
 
 interface Participant {
   name: string;
   score: number;
+  _1A: Team[];
+  _2A: Team[];
+  _1B: Team[];
+  _2B: Team[];
+  _1C: Team[];
+  _2C: Team[];
+  _1D: Team[];
+  _2D: Team[];
+  _1E: Team[];
+  _2E: Team[];
+  _1F: Team[];
+  _2F: Team[];
+  _1G: Team[];
+  _2G: Team[];
+  _1H: Team[];
+  _2H: Team[];
 }
 const response = await fetch(
   "https://api.baseql.com/airtable/graphql/appPY7EZiXBATGkqR",
@@ -13,9 +30,73 @@ const response = await fetch(
     body: JSON.stringify({
       query: `
 				query getParticipants {
-					bracketAnswers(_order_by: "score") {
+					bracketAnswers(_order_by: [{ score: "desc"}]) {
             name
             score
+            _1A {
+              name
+              flag
+            }
+            _2A {
+              name
+              flag
+            }
+            _1B {
+              name
+              flag
+            }
+            _2B {
+              name
+              flag
+            }
+            _1C {
+              name
+              flag
+            }
+            _2C {
+              name
+              flag
+            }
+            _1D {
+              name
+              flag
+            }
+            _2D {
+              name
+              flag
+            }
+            _1E {
+              name
+              flag
+            }
+            _2E {
+              name
+              flag
+            }
+            _1F {
+              name
+              flag
+            }
+            _2F {
+              name
+              flag
+            }
+            _1G {
+              name
+              flag
+            }
+            _2G {
+              name
+              flag
+            }
+            _1H {
+              name
+              flag
+            }
+            _2H {
+              name
+              flag
+            }
           }
 				}`,
     }),
@@ -28,16 +109,98 @@ const participants: Participant[] = json.data.bracketAnswers;
 <Layout title="Leaderboard">
   <main>
     <h1>Leaderboard</h1>
-    <p class="instructions">
-      leaderboard will update after each stage results are calculated
-    </p>
-    <ul>
-      {
-        participants.map((p) => {
-          return <li>{p.name} {p.score}</li>;
-        })
-      }
-    </ul>
+    <div class="instructions">
+      <!-- https://www.foxsports.com/fantasy/world-cup-bracket-challenge/rules -->
+      <p>Rules:</p>
+      <ul>
+        <li>
+          1 point for each correct Group winner selection (8 total points
+          possible)
+        </li>
+        <li>
+          1 point for each correct Group runner-up selection (8 total points
+          possible)
+        </li>
+        <li>
+          2 points for each correct Round of 16 Match-up Winner selection (16
+          total points possible)
+        </li>
+        <li>
+          4 points for each correct Quarter Finals Match-up Winner selection (16
+          total points possible)
+        </li>
+        <li>
+          4 points for correct Team to Advance to the Third Place Game selection
+          (8 total points possible)
+        </li>
+        <li>
+          8 points for correct Team to Advance to the Finals selection (16 total
+          points possible)
+        </li>
+        <li>
+          8 points for correct Third Place Finisher selection (8 total points
+          possible)
+        </li>
+        <li>
+          16 points for correct World Cup Champion selection (16 total points
+          possible)
+        </li>
+      </ul>
+    </div>
+    <div id="group">
+      <table>
+        <thead>
+          <tr>
+            <th class="table-left">Name</th>
+            <th>Points</th>
+            <th>1A</th>
+            <th>2A</th>
+            <th>1B</th>
+            <th>2B</th>
+            <th>1C</th>
+            <th>2C</th>
+            <th>1D</th>
+            <th>2D</th>
+            <th>1E</th>
+            <th>2E</th>
+            <th>1F</th>
+            <th>2F</th>
+            <th>1G</th>
+            <th>2G</th>
+            <th>1H</th>
+            <th>2H</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            participants.map((p) => {
+              return (
+                <tr>
+                  <td class="table-left">{p.name}</td>
+                  <td>{p.score}</td>
+                  <td>{p._1A[0].flag}</td>
+                  <td>{p._2A[0].flag}</td>
+                  <td>{p._1B[0].flag}</td>
+                  <td>{p._2B[0].flag}</td>
+                  <td>{p._1C[0].flag}</td>
+                  <td>{p._2C[0].flag}</td>
+                  <td>{p._1D[0].flag}</td>
+                  <td>{p._2D[0].flag}</td>
+                  <td>{p._1E[0].flag}</td>
+                  <td>{p._2E[0].flag}</td>
+                  <td>{p._1F[0].flag}</td>
+                  <td>{p._2F[0].flag}</td>
+                  <td>{p._1G[0].flag}</td>
+                  <td>{p._2G[0].flag}</td>
+                  <td>{p._1H[0].flag}</td>
+                  <td>{p._2H[0].flag}</td>
+                </tr>
+              );
+            })
+          }
+        </tbody>
+      </table>
+    </div>
   </main>
 </Layout>
 
@@ -60,5 +223,39 @@ const participants: Participant[] = json.data.bracketAnswers;
     background-color: white;
     padding: 1rem;
     border-radius: 0.4rem;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    position: relative;
+    margin: 10px auto;
+  }
+  .table-left {
+    width: 200px;
+    text-align: left;
+  }
+
+  /* Zebra striping */
+  tr:nth-of-type(odd) {
+    background: #eee;
+  }
+
+  th {
+    background: #56042c;
+    color: white;
+    font-weight: bold;
+  }
+
+  td {
+    display: table-cell;
+    text-align: center;
+  }
+  ,
+  th {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+    font-size: 16px;
+    vertical-align: middle;
   }
 </style>
