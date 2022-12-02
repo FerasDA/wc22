@@ -174,28 +174,32 @@ const participants: Participant[] = json.data.bracketAnswers;
         <tbody>
           {
             participants.map((p, index) => {
-              return (
-                <tr>
-                  <td class="table-left">{index}. {p.name}</td>
-                  <td>{p.score}</td>
-                  <td>{p._1A[0].flag}</td>
-                  <td>{p._2A[0].flag}</td>
-                  <td>{p._1B[0].flag}</td>
-                  <td>{p._2B[0].flag}</td>
-                  <td>{p._1C[0].flag}</td>
-                  <td>{p._2C[0].flag}</td>
-                  <td>{p._1D[0].flag}</td>
-                  <td>{p._2D[0].flag}</td>
-                  <td>{p._1E[0].flag}</td>
-                  <td>{p._2E[0].flag}</td>
-                  <td>{p._1F[0].flag}</td>
-                  <td>{p._2F[0].flag}</td>
-                  <td>{p._1G[0].flag}</td>
-                  <td>{p._2G[0].flag}</td>
-                  <td>{p._1H[0].flag}</td>
-                  <td>{p._2H[0].flag}</td>
-                </tr>
-              );
+              if (p._1A.length !== 0) {
+                return (
+                  <tr>
+                    <td class="table-left">
+                      {index}. {p.name}
+                    </td>
+                    <td>{p.score}</td>
+                    <td>{p._1A[0]?.flag}</td>
+                    <td>{p._2A[0]?.flag}</td>
+                    <td>{p._1B[0]?.flag}</td>
+                    <td>{p._2B[0]?.flag}</td>
+                    <td>{p._1C[0]?.flag}</td>
+                    <td>{p._2C[0]?.flag}</td>
+                    <td>{p._1D[0]?.flag}</td>
+                    <td>{p._2D[0]?.flag}</td>
+                    <td>{p._1E[0]?.flag}</td>
+                    <td>{p._2E[0]?.flag}</td>
+                    <td>{p._1F[0]?.flag}</td>
+                    <td>{p._2F[0]?.flag}</td>
+                    <td>{p._1G[0]?.flag}</td>
+                    <td>{p._2G[0]?.flag}</td>
+                    <td>{p._1H[0]?.flag}</td>
+                    <td>{p._2H[0]?.flag}</td>
+                  </tr>
+                );
+              }
             })
           }
         </tbody>
