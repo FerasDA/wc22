@@ -29,6 +29,14 @@ interface Participant {
   r166: Team[];
   r167: Team[];
   r168: Team[];
+  r81: Team[];
+  r82: Team[];
+  r83: Team[];
+  r84: Team[];
+  r41: Team[];
+  r42: Team[];
+  third: Team[];
+  final: Team[];
 }
 const response = await fetch(
   "https://api.baseql.com/airtable/graphql/appPY7EZiXBATGkqR",
@@ -135,6 +143,38 @@ const response = await fetch(
             }
             r168 {
               name
+              flag
+            }
+            r81 {
+              name 
+              flag
+            }
+            r82 {
+              name 
+              flag
+            }
+            r83 {
+              name 
+              flag
+            }
+            r84 {
+              name 
+              flag
+            }
+            r41 {
+              name 
+              flag
+            }
+            r42 {
+              name 
+              flag
+            }
+            third {
+              name 
+              flag
+            }
+            final {
+              name 
               flag
             }
           }
@@ -261,14 +301,14 @@ const participants: Participant[] = json.data.bracketAnswers;
                     <td>{p.r166[0]?.flag}</td>
                     <td>{p.r167[0]?.flag}</td>
                     <td>{p.r168[0]?.flag}</td>
-                    <td />
-                    <td />
-                    <td />
-                    <td />
-                    <td />
-                    <td />
-                    <td />
-                    <td />
+                    <td>{p.r81[0]?.flag}</td>
+                    <td>{p.r82[0]?.flag}</td>
+                    <td>{p.r83[0]?.flag}</td>
+                    <td>{p.r84[0]?.flag}</td>
+                    <td>{p.r41[0]?.flag}</td>
+                    <td>{p.r42[0]?.flag}</td>
+                    <td>{p.third[0]?.flag}</td>
+                    <td>{p.final[0]?.flag}</td>
                   </tr>
                 );
               }
