@@ -21,6 +21,14 @@ interface Participant {
   _2G: Team[];
   _1H: Team[];
   _2H: Team[];
+  r161: Team[];
+  r162: Team[];
+  r163: Team[];
+  r164: Team[];
+  r165: Team[];
+  r166: Team[];
+  r167: Team[];
+  r168: Team[];
 }
 const response = await fetch(
   "https://api.baseql.com/airtable/graphql/appPY7EZiXBATGkqR",
@@ -97,6 +105,38 @@ const response = await fetch(
               name
               flag
             }
+            r161 {
+              name
+              flag
+            }
+            r162 {
+              name
+              flag
+            }
+            r163 {
+              name
+              flag
+            }
+            r164 {
+              name
+              flag
+            }
+            r165 {
+              name
+              flag
+            }
+            r166 {
+              name
+              flag
+            }
+            r167 {
+              name
+              flag
+            }
+            r168 {
+              name
+              flag
+            }
           }
 				}`,
     }),
@@ -169,6 +209,22 @@ const participants: Participant[] = json.data.bracketAnswers;
             <th>2G</th>
             <th>1H</th>
             <th>2H</th>
+            <th>R16</th>
+            <th>R16</th>
+            <th>R16</th>
+            <th>R16</th>
+            <th>R16</th>
+            <th>R16</th>
+            <th>R16</th>
+            <th>R16</th>
+            <th>QF</th>
+            <th>QF</th>
+            <th>QF</th>
+            <th>QF</th>
+            <th>SF</th>
+            <th>SF</th>
+            <th>3P</th>
+            <th>Final</th>
           </tr>
         </thead>
         <tbody>
@@ -197,6 +253,22 @@ const participants: Participant[] = json.data.bracketAnswers;
                     <td>{p._2G[0]?.flag}</td>
                     <td>{p._1H[0]?.flag}</td>
                     <td>{p._2H[0]?.flag}</td>
+                    <td>{p.r161[0]?.flag}</td>
+                    <td>{p.r162[0]?.flag}</td>
+                    <td>{p.r163[0]?.flag}</td>
+                    <td>{p.r164[0]?.flag}</td>
+                    <td>{p.r165[0]?.flag}</td>
+                    <td>{p.r166[0]?.flag}</td>
+                    <td>{p.r167[0]?.flag}</td>
+                    <td>{p.r168[0]?.flag}</td>
+                    <td />
+                    <td />
+                    <td />
+                    <td />
+                    <td />
+                    <td />
+                    <td />
+                    <td />
                   </tr>
                 );
               }
@@ -253,6 +325,7 @@ const participants: Participant[] = json.data.bracketAnswers;
   td {
     display: table-cell;
     text-align: center;
+    word-wrap: break-word;
   }
   ,
   th {
